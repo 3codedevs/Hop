@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import {
+  AnimatePresence,
   motion,
   useMotionValueEvent,
   useReducedMotion,
@@ -73,12 +74,12 @@ export function RushHour() {
     >
       <div className="grain sticky top-0 h-[100svh] overflow-hidden">
         {/* Photography */}
-        <motion.div className="absolute inset-0" style={{ scale: zoom }}>
+        <motion.div className="absolute inset-0 will-change-transform [backface-visibility:hidden]" style={{ scale: zoom }}>
           <img src="/img/third-mainland-day.jpg" srcSet={srcSet('/img/third-mainland-day.jpg', [800, 1400, 2200])} sizes="100vw" alt="" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
-          <motion.img src="/img/lagos-dusk.jpg" srcSet={srcSet('/img/lagos-dusk.jpg', [800, 1400, 2200])} sizes="100vw" alt="" loading="lazy" decoding="async" style={{ opacity: dusk }} className="absolute inset-0 h-full w-full object-cover" />
-          <motion.img src="/img/lagos-bridge-night.jpg" srcSet={srcSet('/img/lagos-bridge-night.jpg', [800, 1400, 2200])} sizes="100vw" alt="" loading="lazy" decoding="async" style={{ opacity: night }} className="absolute inset-0 h-full w-full object-cover" />
+          <motion.img src="/img/lagos-dusk.jpg" srcSet={srcSet('/img/lagos-dusk.jpg', [800, 1400, 2200])} sizes="100vw" alt="" decoding="async" style={{ opacity: dusk }} className="absolute inset-0 h-full w-full object-cover will-change-[opacity]" />
+          <motion.img src="/img/lagos-bridge-night.jpg" srcSet={srcSet('/img/lagos-bridge-night.jpg', [800, 1400, 2200])} sizes="100vw" alt="" decoding="async" style={{ opacity: night }} className="absolute inset-0 h-full w-full object-cover will-change-[opacity]" />
         </motion.div>
-        <motion.div className="absolute inset-0 mix-blend-multiply" style={{ backgroundColor: tint }} />
+        <motion.div className="absolute inset-0 mix-blend-multiply [transform:translateZ(0)]" style={{ backgroundColor: tint }} />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(11_11_10/0.7)_0%,rgb(11_11_10/0.15)_35%,rgb(11_11_10/0.25)_60%,rgb(11_11_10/0.88)_100%)]" />
 
         <div className="shell relative flex h-full flex-col pt-24 pb-8">
@@ -134,13 +135,14 @@ export function RushHour() {
 
           {/* Bottom: answer card + scroll hint */}
           <div className="flex items-end justify-between gap-6">
-            <motion.div
-              key={`${snap.hour}-${snap.mode}`}
-              initial={reduce ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: EASE }}
-              className="w-full max-w-lg rounded-[20px] border border-white/12 bg-night/60 p-4 backdrop-blur-xl sm:p-6"
-            >
+            <div className="w-full max-w-lg rounded-[20px] border border-white/12 bg-night/85 p-4 [transform:translateZ(0)] sm:p-6 lg:bg-night/60 lg:backdrop-blur-xl">
+              <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={snap.hour}
+                initial={reduce ? false : { opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.32, ease: EASE } }}
+                exit={reduce ? { opacity: 1 } : { opacity: 0, y: -6, transition: { duration: 0.18, ease: 'easeIn' } }}
+              >
               <div className="flex items-center justify-between">
                 <span className="caption inline-flex items-center gap-2 text-chalk/70">
                   <Icon className="h-3.5 w-3.5" />
@@ -164,7 +166,9 @@ export function RushHour() {
                 </div>
               </div>
               <p className="mt-3 hidden text-[13px] leading-relaxed text-chalk/70 sm:mt-4 sm:block">{snap.note}</p>
-            </motion.div>
+              </motion.div>
+              </AnimatePresence>
+            </div>
 
             <div className="caption hidden text-right text-chalk/60 sm:block">
               Scroll to change the time
