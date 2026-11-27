@@ -69,7 +69,7 @@ export function Navbar() {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="flex items-center gap-3"
+            className="flex min-h-11 items-center gap-3"
             aria-label="Hop, back to top"
           >
             <Logo />
@@ -94,7 +94,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => go('planner')}
-              className="group inline-flex h-10 items-center gap-1.5 rounded-full bg-signal px-4 text-[13px] font-semibold text-ink transition-transform duration-300 hover:-translate-y-px"
+              className="group inline-flex h-11 items-center gap-1.5 rounded-full bg-signal px-4 text-[13px] font-semibold text-ink transition-transform duration-300 hover:-translate-y-px lg:h-10"
             >
               Plan a trip
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
@@ -104,7 +104,7 @@ export function Navbar() {
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-current/15 lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-current/15 lg:hidden"
             >
               {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>

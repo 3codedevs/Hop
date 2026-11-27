@@ -53,7 +53,7 @@ export function LagosMapSection() {
     setReports((prev) => [{ id: (prev[0]?.id ?? 0) + 1, text, where: hub.name, ago: 'just now' }, ...prev.slice(0, 3)]);
 
   return (
-    <ChapterSection id="corridors" className="relative overflow-hidden bg-night py-24 text-chalk md:py-36">
+    <ChapterSection id="corridors" className="relative overflow-hidden bg-night py-20 text-chalk md:py-36">
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-3xl">
@@ -70,8 +70,8 @@ export function LagosMapSection() {
         </div>
 
         {/* Map */}
-        <Reveal className="mt-14">
-          <div className="relative h-[min(80vh,760px)] min-h-[520px] overflow-hidden rounded-[22px] border border-white/10 bg-[#161613]">
+        <Reveal className="mt-10 lg:mt-14">
+          <div className="relative h-[70svh] min-h-[440px] overflow-hidden lg:h-[min(80vh,760px)] lg:min-h-[520px] rounded-[22px] border border-white/10 bg-[#161613]">
             <LagosMap
               hubs={LAGOS_HUBS}
               selectedId={hubId}
@@ -190,7 +190,7 @@ function HubReadout({
               key={t}
               type="button"
               onClick={() => onReport(t)}
-              className="rounded-full border border-white/20 px-3.5 py-2 text-[13px] transition-colors hover:border-chalk hover:bg-chalk hover:text-ink"
+              className="inline-flex min-h-11 items-center rounded-full border border-white/20 px-4 text-[13px] transition-colors hover:border-chalk hover:bg-chalk hover:text-ink lg:min-h-9"
             >
               {t}
             </button>

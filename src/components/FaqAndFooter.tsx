@@ -35,7 +35,7 @@ export function FaqAndFooter() {
 
   return (
     <>
-      <section id="faq" className="border-t border-line py-24 md:py-36">
+      <section id="faq" className="border-t border-line py-20 md:py-36">
         <div className="shell grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Kicker n={6}>Questions</Kicker>

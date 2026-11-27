@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Search, ArrowDown } from 'lucide-react';
 import { ROUTE_SCENARIOS } from '../data/hopData';
-import { EASE, MODE_META } from '../lib/ui';
+import { EASE, MODE_META, srcSet } from '../lib/ui';
 import { RevealWords } from './motion/TextFx';
 
 
@@ -47,7 +47,7 @@ export function HeroPlanner({ onJumpToFleet }: HeroPlannerProps) {
         };
 
   return (
-    <section id="top" className="relative pt-28 pb-24 md:pt-32 md:pb-32">
+    <section id="top" className="relative pt-24 pb-16 md:pt-32 md:pb-32">
       <div className="shell">
         {/* Stat row */}
         <motion.dl {...enter(0.05)} className="grid grid-cols-3 gap-4 border-b border-line pb-6 sm:flex sm:gap-x-12">
@@ -106,7 +106,7 @@ export function HeroPlanner({ onJumpToFleet }: HeroPlannerProps) {
                       type="button"
                       onClick={() => pick(sc.id)}
                       aria-pressed={on}
-                      className={`rounded-full border px-3 py-1.5 text-[13px] transition-colors ${
+                      className={`inline-flex min-h-11 items-center rounded-full border px-3.5 text-[13px] transition-colors sm:min-h-9 ${
                         on ? 'border-ink bg-ink text-paper' : 'border-line text-ink hover:border-ink/40'
                       }`}
                     >
@@ -120,9 +120,11 @@ export function HeroPlanner({ onJumpToFleet }: HeroPlannerProps) {
 
           {/* Right: photo plate */}
           <motion.figure {...enter(0.3)} className="lg:col-span-5">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[22px] bg-ink">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[22px] bg-ink lg:aspect-[4/5]">
               <motion.img
                 src="/img/danfo-driver.jpg"
+                srcSet={srcSet('/img/danfo-driver.jpg')}
+                sizes="(min-width: 1024px) 40vw, 100vw"
                 alt="A danfo driver leaning out of his yellow minibus on a Lagos street"
                 className="h-full w-full object-cover"
                 initial={reduce ? false : { scale: 1.12 }}
@@ -194,7 +196,7 @@ export function HeroPlanner({ onJumpToFleet }: HeroPlannerProps) {
                         <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-1">
                           <Icon className="h-3.5 w-3.5 text-muted" />
                           {leg.label}
-                          <span className="num text-[11px] text-muted">{leg.duration}</span>
+                          <span className="num text-[12px] text-muted">{leg.duration}</span>
                         </span>
                         {i < active.topPick.legs.length - 1 && <ArrowRight className="h-3 w-3 text-muted" />}
                       </li>
@@ -243,7 +245,7 @@ export function HeroPlanner({ onJumpToFleet }: HeroPlannerProps) {
                 <button
                   type="button"
                   onClick={onJumpToFleet}
-                  className="group inline-flex items-center gap-1.5 text-[14px] font-semibold"
+                  className="group inline-flex min-h-11 items-center gap-1.5 text-[14px] font-semibold"
                 >
                   Compare with a self-drive rental
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -253,7 +255,7 @@ export function HeroPlanner({ onJumpToFleet }: HeroPlannerProps) {
           </motion.article>
         </AnimatePresence>
 
-        <div className="mt-16 flex items-center justify-center gap-3 text-[13px] text-muted">
+        <div className="mt-16 hidden items-center justify-center gap-3 text-[13px] text-muted sm:flex">
           <span className="relative block h-8 w-px overflow-hidden bg-line">
             <span className="cue absolute inset-0 bg-ink" />
           </span>

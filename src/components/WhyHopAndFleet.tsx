@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, CheckCircle2, Shield, Star, X } from 'lucide-react';
 import { RENTAL_FLEET, WHY_HOP, type RentalCar } from '../data/hopData';
 import { Reveal, RevealWords, ScrollFillText } from './motion/TextFx';
-import { EASE } from '../lib/ui';
+import { EASE, srcSet } from '../lib/ui';
 import { Kicker } from './Kicker';
 
 const naira = (n: number) => `₦${n.toLocaleString('en-NG')}`;
@@ -28,7 +28,7 @@ export function WhyHopAndFleet() {
   return (
     <>
       {/* Why Hop */}
-      <section id="why" className="border-t border-line py-24 md:py-36">
+      <section id="why" className="border-t border-line py-20 md:py-36">
         <div className="shell grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28">
@@ -40,6 +40,8 @@ export function WhyHopAndFleet() {
                 <figure className="mt-10 hidden lg:block">
                   <img
                     src="/img/danfo-park.jpg"
+                    srcSet={srcSet('/img/danfo-park.jpg')}
+                    sizes="40vw"
                     alt="A row of yellow danfo minibuses parked at a Lagos bus stop"
                     loading="lazy"
                     className="aspect-[4/3] w-full rounded-[22px] object-cover"
@@ -78,7 +80,7 @@ export function WhyHopAndFleet() {
       </section>
 
       {/* Self-drive */}
-      <section id="fleet" className="scroll-mt-16 border-t border-line py-24 md:py-36">
+      <section id="fleet" className="scroll-mt-16 border-t border-line py-20 md:py-36">
         <div className="shell">
           <Kicker n={5}>Self-drive</Kicker>
           <ScrollFillText
@@ -106,7 +108,7 @@ export function WhyHopAndFleet() {
                   onChange={(e) => setTrips(Number(e.target.value))}
                   className="hop-range mt-8 w-full"
                 />
-                <div className="num mt-2 flex justify-between text-[11px] text-chalk/40">
+                <div className="num mt-2 flex justify-between text-[12px] text-chalk/45">
                   {[1, 2, 3, 4, 5, 6].map((n) => (
                     <span key={n}>{n}</span>
                   ))}
@@ -153,6 +155,8 @@ export function WhyHopAndFleet() {
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <img
                       src={c.image}
+                      srcSet={srcSet(c.image!)}
+                      sizes="(min-width: 768px) 50vw, 100vw"
                       alt={`${c.name}, available to rent`}
                       loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-[1.2s] ease-[var(--ease-expo)] group-hover:scale-[1.04]"
@@ -184,7 +188,7 @@ export function WhyHopAndFleet() {
                     <button
                       type="button"
                       onClick={() => open(c)}
-                      className="group/b inline-flex items-center gap-1.5 text-[14px] font-semibold"
+                      className="group/b inline-flex min-h-11 items-center gap-1.5 text-[14px] font-semibold"
                     >
                       Book this car
                       <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/b:translate-x-0.5" />
@@ -215,7 +219,7 @@ export function WhyHopAndFleet() {
                 <button
                   type="button"
                   onClick={() => open(c)}
-                  className="rounded-full border border-line px-4 py-2 text-[13px] font-medium transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+                  className="inline-flex min-h-11 items-center rounded-full border border-line px-5 text-[13px] font-medium transition-colors hover:border-ink hover:bg-ink hover:text-paper"
                 >
                   Book
                 </button>
@@ -246,7 +250,7 @@ export function WhyHopAndFleet() {
               className="w-full max-w-md overflow-hidden rounded-[22px] bg-surface shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              {car.image && <img src={car.image} alt="" className="h-40 w-full object-cover" />}
+              {car.image && <img src={car.image} srcSet={srcSet(car.image)} sizes="448px" alt="" className="h-40 w-full object-cover" />}
               <div className="p-6">
                 <div className="flex items-center justify-between">
                   <span className="caption text-muted">Paystack · test mode</span>

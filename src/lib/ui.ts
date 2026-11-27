@@ -21,3 +21,12 @@ export const HUB_STATUS = {
   busy: { label: 'Slow', color: '#E9A23B' },
   alert: { label: 'Alert', color: '#FF5A1F' },
 } as const;
+
+/**
+ * Responsive sources for a photo in /public/img. Each `name.jpg` has WebP
+ * siblings `name-800.webp`, `name-1400.webp` (and `-2200` for full-bleed ones).
+ */
+export function srcSet(path: string, widths: number[] = [800, 1400]) {
+  const base = path.replace(/\.jpg$/, '');
+  return widths.map((w) => `${base}-${w}.webp ${w}w`).join(', ');
+}

@@ -7,7 +7,7 @@ import {
   useTransform,
 } from 'framer-motion';
 import { DAY_PHASES, TIME_OF_DAY, type HourSnapshot } from '../data/hopData';
-import { EASE, MODE_META } from '../lib/ui';
+import { EASE, MODE_META, srcSet } from '../lib/ui';
 import { Kicker } from './Kicker';
 
 const START_H = 6;
@@ -68,15 +68,15 @@ export function RushHour() {
       id="rush"
       data-tone="dark"
       className="relative bg-night text-chalk"
-      style={{ height: '440vh' }}
+      style={{ height: '440svh' }}
       aria-label="How the best route from Yaba to Lekki changes through the day"
     >
       <div className="grain sticky top-0 h-[100svh] overflow-hidden">
         {/* Photography */}
         <motion.div className="absolute inset-0" style={{ scale: zoom }}>
-          <img src="/img/third-mainland-day.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" />
-          <motion.img src="/img/lagos-dusk.jpg" alt="" style={{ opacity: dusk }} className="absolute inset-0 h-full w-full object-cover" />
-          <motion.img src="/img/lagos-bridge-night.jpg" alt="" style={{ opacity: night }} className="absolute inset-0 h-full w-full object-cover" />
+          <img src="/img/third-mainland-day.jpg" srcSet={srcSet('/img/third-mainland-day.jpg', [800, 1400, 2200])} sizes="100vw" alt="" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+          <motion.img src="/img/lagos-dusk.jpg" srcSet={srcSet('/img/lagos-dusk.jpg', [800, 1400, 2200])} sizes="100vw" alt="" loading="lazy" decoding="async" style={{ opacity: dusk }} className="absolute inset-0 h-full w-full object-cover" />
+          <motion.img src="/img/lagos-bridge-night.jpg" srcSet={srcSet('/img/lagos-bridge-night.jpg', [800, 1400, 2200])} sizes="100vw" alt="" loading="lazy" decoding="async" style={{ opacity: night }} className="absolute inset-0 h-full w-full object-cover" />
         </motion.div>
         <motion.div className="absolute inset-0 mix-blend-multiply" style={{ backgroundColor: tint }} />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(11_11_10/0.7)_0%,rgb(11_11_10/0.15)_35%,rgb(11_11_10/0.25)_60%,rgb(11_11_10/0.88)_100%)]" />
@@ -118,6 +118,18 @@ export function RushHour() {
               {pad(minutes % 60)}
             </div>
             <div className="mt-2 font-serif text-[24px] italic text-chalk/85">{phase.label}</div>
+            <div className="mt-6 w-full max-w-xs lg:hidden" aria-hidden="true">
+              <div className="relative h-px bg-chalk/30">
+                <motion.span className="absolute top-1/2 block h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-signal" style={{ left: markerY }} />
+              </div>
+              <div className="mt-2 flex justify-between text-[12px] text-chalk/55">
+                <span>6:00</span>
+                <span>Rush</span>
+                <span>Midday</span>
+                <span>Rush</span>
+                <span>22:00</span>
+              </div>
+            </div>
           </div>
 
           {/* Bottom: answer card + scroll hint */}
@@ -127,7 +139,7 @@ export function RushHour() {
               initial={reduce ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: EASE }}
-              className="w-full max-w-lg rounded-[20px] border border-white/12 bg-night/55 p-5 backdrop-blur-xl sm:p-6"
+              className="w-full max-w-lg rounded-[20px] border border-white/12 bg-night/60 p-4 backdrop-blur-xl sm:p-6"
             >
               <div className="flex items-center justify-between">
                 <span className="caption inline-flex items-center gap-2 text-chalk/70">
@@ -136,8 +148,8 @@ export function RushHour() {
                 </span>
                 <span className="h-2 w-2 rounded-full bg-signal" />
               </div>
-              <div className="mt-3 font-serif text-[24px] leading-snug font-normal">{snap.best}</div>
-              <div className="mt-4 grid grid-cols-2 gap-3 border-t border-white/10 pt-4 sm:grid-cols-3">
+              <div className="mt-2 font-serif text-[20px] leading-snug font-normal sm:mt-3 sm:text-[24px]">{snap.best}</div>
+              <div className="mt-3 grid grid-cols-3 gap-3 border-t border-white/10 pt-3 sm:mt-4 sm:pt-4">
                 <div>
                   <div className="caption text-chalk/50">Cost</div>
                   <div className="num mt-1 text-[14px]">{snap.cost}</div>
@@ -146,12 +158,12 @@ export function RushHour() {
                   <div className="caption text-chalk/50">Time</div>
                   <div className="num mt-1 text-[14px]">{snap.time}</div>
                 </div>
-                <div className="col-span-2 sm:col-span-1">
+                <div>
                   <div className="caption text-chalk/50">Ride-hail</div>
-                  <div className="num mt-1 text-[14px] whitespace-nowrap text-chalk/70">{snap.rideHail}</div>
+                  <div className="num mt-1 text-[13px] text-chalk/70 sm:text-[14px] sm:whitespace-nowrap">{snap.rideHail}</div>
                 </div>
               </div>
-              <p className="mt-4 text-[13px] leading-relaxed text-chalk/70">{snap.note}</p>
+              <p className="mt-3 hidden text-[13px] leading-relaxed text-chalk/70 sm:mt-4 sm:block">{snap.note}</p>
             </motion.div>
 
             <div className="caption hidden text-right text-chalk/60 sm:block">

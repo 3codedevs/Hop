@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Bus, Car, Navigation } from 'lucide-react';
 import { RevealWords } from './motion/TextFx';
-import { EASE } from '../lib/ui';
+import { EASE, srcSet } from '../lib/ui';
 import { Kicker } from './Kicker';
 
 const STEPS = [
@@ -31,20 +31,24 @@ function Step({ step, index, active, onActive }: { step: (typeof STEPS)[number];
   }, [inView, index, onActive]);
 
   return (
-    <li ref={ref} className="flex min-h-[40vh] items-center lg:min-h-[52vh]">
-      <button
-        type="button"
-        onClick={() => onActive(index)}
-        className={`w-full rounded-[22px] p-6 text-left transition-all duration-500 sm:p-8 ${
-          active ? 'bg-surface shadow-[0_1px_2px_rgb(14_15_12/0.04),0_24px_48px_-32px_rgb(14_15_12/0.3)]' : 'opacity-40 hover:opacity-70'
+    <li ref={ref} className="lg:flex lg:min-h-[52vh] lg:items-center">
+      {/* Phones: every step is a full card with its own screen. Desktop: steps light up beside the sticky phone. */}
+      <div
+        className={`w-full rounded-[22px] bg-surface p-6 shadow-[0_1px_2px_rgb(14_15_12/0.04),0_24px_48px_-32px_rgb(14_15_12/0.3)] transition-all duration-500 sm:p-8 lg:bg-transparent lg:shadow-none ${
+          active ? 'lg:bg-surface lg:shadow-[0_1px_2px_rgb(14_15_12/0.04),0_24px_48px_-32px_rgb(14_15_12/0.3)]' : 'lg:opacity-40 lg:hover:opacity-70'
         }`}
       >
-        <div className="flex items-baseline gap-4">
-          <span className="font-serif text-[20px] italic text-signal-deep">{step.num}</span>
-          <h3 className="font-serif text-[clamp(1.6rem,2.4vw,2.25rem)] leading-tight font-normal tracking-[-0.015em]">{step.title}</h3>
+        <button type="button" onClick={() => onActive(index)} className="w-full text-left">
+          <div className="flex items-baseline gap-4">
+            <span className="font-serif text-[20px] italic text-signal-deep">{step.num}</span>
+            <h3 className="font-serif text-[clamp(1.6rem,2.4vw,2.25rem)] leading-tight font-normal tracking-[-0.015em]">{step.title}</h3>
+          </div>
+          <p className="mt-3 max-w-md pl-9 text-[15px] leading-relaxed text-muted">{step.body}</p>
+        </button>
+        <div className="mt-6 rounded-2xl border border-line bg-paper/60 p-5 lg:hidden" aria-hidden="true">
+          <Screen step={index} />
         </div>
-        <p className="mt-3 max-w-md pl-9 text-[15px] leading-relaxed text-muted">{step.body}</p>
-      </button>
+      </div>
     </li>
   );
 }
@@ -95,14 +99,14 @@ function Screen({ step }: { step: number }) {
             </li>
           ))}
         </ul>
-        <div className="mt-3 rounded-xl bg-go/10 px-3 py-2.5 text-[12px] text-go">Saves ₦3,200 and 18 min vs ride-hailing</div>
+        <div className="mt-3 rounded-xl bg-go/10 px-3 py-2.5 text-[12px] text-go">Saves ₦3,200 and 18 minutes over ride-hailing</div>
       </div>
     );
   return (
     <div>
       <div className="text-[20px] font-semibold tracking-[-0.01em]">Your day: 4 stops</div>
       <div className="mt-3 overflow-hidden rounded-xl">
-        <img src="/img/corolla-sedan.jpg" alt="" className="h-28 w-full object-cover" />
+        <img src="/img/corolla-sedan.jpg" srcSet={srcSet('/img/corolla-sedan.jpg')} sizes="320px" alt="" loading="lazy" decoding="async" className="h-28 w-full object-cover" />
       </div>
       <div className="mt-3 flex items-center justify-between text-[13px]">
         <span className="flex items-center gap-2">
@@ -129,7 +133,7 @@ export function StickyJourney() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="how" className="py-24 md:py-36">
+    <section id="how" className="py-20 md:py-36">
       <div className="shell">
         <div className="max-w-3xl">
           <Kicker n={2}>How it works</Kicker>
@@ -138,7 +142,7 @@ export function StickyJourney() {
           </h2>
         </div>
 
-        <div className="mt-8 grid gap-10 lg:grid-cols-12">
+        <div className="mt-10 grid gap-10 lg:mt-8 lg:grid-cols-12">
           <div className="relative lg:col-span-7">
             <span aria-hidden="true" className="absolute top-0 bottom-0 left-0 hidden w-px bg-line lg:block">
               <motion.span
@@ -147,7 +151,7 @@ export function StickyJourney() {
                 transition={{ duration: 0.6, ease: EASE }}
               />
             </span>
-            <ol className="lg:pl-8">
+            <ol className="space-y-4 lg:space-y-0 lg:pl-8">
               {STEPS.map((s, i) => (
                 <Step key={s.num} step={s} index={i} active={i === active} onActive={setActive} />
               ))}
