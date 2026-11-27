@@ -39,9 +39,9 @@ export const ROUTE_SCENARIOS: RouteScenario[] = [
     topPick: {
       mode: 'brt',
       title: 'BRT to CMS, then Lekki shuttle + 5 min walk',
-      costLabel: 'About ₦900 – ₦1,300',
+      costLabel: 'About ₦900–1,300',
       timeLabel: '48 min',
-      savingsBadge: 'Saves ₦3,200 & 18 min vs ride-hailing',
+      savingsBadge: 'Saves ₦3,200 and 18 minutes over ride-hailing',
       reason:
         'Third Mainland southbound is heavy at 8am. Dedicated BRT lanes clear Fadeyi to CMS cleanly before crossing.',
       legs: [
@@ -56,7 +56,7 @@ export const ROUTE_SCENARIOS: RouteScenario[] = [
       {
         mode: 'danfo',
         label: 'Danfo via Obalende',
-        costLabel: 'About ₦700 – ₦1,100',
+        costLabel: 'About ₦700–1,100',
         timeLabel: '56 min',
         reliability: 'Moderate · cash only',
       },
@@ -75,13 +75,13 @@ export const ROUTE_SCENARIOS: RouteScenario[] = [
     query: 'Ikeja → Yaba → VI → Lekki → Ikeja today',
     origin: 'Ikeja',
     destination: '4-stop day loop',
-    departure: 'All day (09:00 – 19:00)',
+    departure: 'All day, 09:00–19:00',
     topPick: {
       mode: 'rental',
       title: 'Self-drive day rental (Toyota Corolla · Verified)',
-      costLabel: '₦18,000 / day + fuel',
+      costLabel: '₦18,000 a day, plus fuel',
       timeLabel: 'Full day',
-      savingsBadge: 'Saves ~₦6,000 vs 4 ride-hailing trips',
+      savingsBadge: 'Saves about ₦6,000 over four ride-hails',
       reason:
         'Four separate ride-hailing legs today estimate at ₦24,000 with surge risk. Renting one car keeps your schedule under your control.',
       legs: [
@@ -103,7 +103,7 @@ export const ROUTE_SCENARIOS: RouteScenario[] = [
       {
         mode: 'brt',
         label: 'BRT + Danfo mix',
-        costLabel: 'About ₦3,400 – ₦4,800',
+        costLabel: 'About ₦3,400–4,800',
         timeLabel: '3h 40m total',
         reliability: '4 transfers',
       },
@@ -119,9 +119,9 @@ export const ROUTE_SCENARIOS: RouteScenario[] = [
     topPick: {
       mode: 'brt',
       title: 'BRT Express from Ikeja Along to CMS',
-      costLabel: 'About ₦650 – ₦850',
+      costLabel: 'About ₦650–850',
       timeLabel: '39 min',
-      savingsBadge: 'Saves ₦4,100 & 22 min vs road traffic',
+      savingsBadge: 'Saves ₦4,100 and 22 minutes over the road',
       reason:
         'Ikorodu Road has a stalled truck near Palmgrove. BRT corridor bypasses the bottleneck completely.',
       legs: [
@@ -142,7 +142,7 @@ export const ROUTE_SCENARIOS: RouteScenario[] = [
       {
         mode: 'danfo',
         label: 'Danfo via Ojota',
-        costLabel: 'About ₦500 – ₦800',
+        costLabel: 'About ₦500–800',
         timeLabel: '58 min',
         reliability: 'Moderate · 1 transfer',
       },
@@ -153,8 +153,8 @@ export const ROUTE_SCENARIOS: RouteScenario[] = [
 export interface LagosHub {
   id: string;
   name: string;
-  x: number;
-  y: number;
+  /** [longitude, latitude] */
+  lngLat: [number, number];
   status: 'clear' | 'busy' | 'alert';
   report: string;
   corridor: string;
@@ -164,55 +164,49 @@ export const LAGOS_HUBS: LagosHub[] = [
   {
     id: 'ikeja',
     name: 'Ikeja',
-    x: 34,
-    y: 22,
+    lngLat: [3.3476, 6.6045],
     status: 'clear',
-    report: 'BRT Express boarding · 4m wait',
+    report: 'BRT Express is boarding now. Expect about a four-minute wait.',
     corridor: 'Ikorodu Rd North',
   },
   {
     id: 'oshodi',
     name: 'Oshodi',
-    x: 28,
-    y: 44,
+    lngLat: [3.3434, 6.5551],
     status: 'busy',
-    report: 'Terminal 2 busy · Danfo ₦400–₦600',
+    report: 'Terminal 2 is busy. Danfos are charging ₦400–600.',
     corridor: 'Apapa–Oshodi',
   },
   {
     id: 'yaba',
     name: 'Yaba',
-    x: 47,
-    y: 48,
+    lngLat: [3.3707, 6.515],
     status: 'clear',
-    report: '3rd Mainland clear · 14m to Island',
+    report: 'Third Mainland is clear, about 14 minutes to the Island.',
     corridor: 'Mainland Hub',
   },
   {
     id: 'cms',
     name: 'CMS / Marina',
-    x: 52,
-    y: 72,
+    lngLat: [3.3897, 6.4527],
     status: 'alert',
-    report: 'Ghost bus flagged 6m ago · use BRT 102',
+    report: 'A bus was reported missing six minutes ago. Take BRT 102 instead.',
     corridor: 'Island Terminal',
   },
   {
     id: 'vi',
     name: 'Victoria Island',
-    x: 68,
-    y: 78,
+    lngLat: [3.4208, 6.4298],
     status: 'clear',
-    report: 'Ozumba Mbadiwe moving smoothly',
+    report: 'Ozumba Mbadiwe is moving smoothly.',
     corridor: 'VI Loop',
   },
   {
     id: 'lekki',
     name: 'Lekki Phase 1',
-    x: 84,
-    y: 74,
+    lngLat: [3.4724, 6.4474],
     status: 'busy',
-    report: 'Admiralty toll slow · +9 min',
+    report: 'Slow at the Admiralty toll gate, adding about nine minutes.',
     corridor: 'Lekki–Epe',
   },
 ];
@@ -376,15 +370,15 @@ export const DAY_PHASES: { id: DayPhase; label: string; from: number }[] = [
 
 export const TIME_OF_DAY: HourSnapshot[] = [
   { hour: 6, phase: 'early', traffic: 22, best: 'Ride-hail straight across Third Mainland', mode: 'ride', cost: '₦3,100', time: '27 min', rideHail: '₦3,100 · 27 min', note: 'Roads are still open. The fastest door-to-door option is also fair on price.' },
-  { hour: 7, phase: 'rush', traffic: 71, best: 'BRT 102 to CMS, then the Lekki shuttle', mode: 'brt', cost: '₦900 to ₦1,300', time: '46 min', rideHail: '₦4,200 · 58 min', note: 'Third Mainland is filling up. Dedicated BRT lanes clear Fadeyi to CMS.' },
-  { hour: 8, phase: 'rush', traffic: 92, best: 'BRT 102 to CMS, then the Lekki shuttle', mode: 'brt', cost: '₦900 to ₦1,300', time: '48 min', rideHail: '₦4,500 · 66 min', note: 'Peak surge. The bus lane is the only part of the bridge that moves.' },
-  { hour: 9, phase: 'rush', traffic: 78, best: 'BRT 102 to CMS, then the Lekki shuttle', mode: 'brt', cost: '₦900 to ₦1,300', time: '44 min', rideHail: '₦4,100 · 57 min', note: 'Still heavy past Adeniji. BRT keeps its lead for one more hour.' },
-  { hour: 11, phase: 'midday', traffic: 41, best: 'Danfo via Obalende', mode: 'danfo', cost: '₦700 to ₦1,100', time: '50 min', rideHail: '₦3,300 · 34 min', note: 'Traffic eases. Danfo is the cheapest seat, ride-hail the quickest.' },
-  { hour: 13, phase: 'midday', traffic: 38, best: 'Danfo via Obalende', mode: 'danfo', cost: '₦700 to ₦1,100', time: '48 min', rideHail: '₦3,200 · 32 min', note: 'Quietest window of the day to cross to the Island.' },
-  { hour: 15, phase: 'midday', traffic: 52, best: 'Danfo via Obalende', mode: 'danfo', cost: '₦700 to ₦1,100', time: '52 min', rideHail: '₦3,500 · 39 min', note: 'School runs start. Lekki toll gate begins to slow.' },
-  { hour: 17, phase: 'evening', traffic: 88, best: 'BRT to CMS, then walk to the jetty ferry', mode: 'brt', cost: '₦1,400 to ₦1,900', time: '55 min', rideHail: '₦5,200 · 78 min', note: 'Island to Mainland is jammed, and the Lekki side is close behind.' },
-  { hour: 18, phase: 'evening', traffic: 95, best: 'BRT to CMS, then walk to the jetty ferry', mode: 'brt', cost: '₦1,400 to ₦1,900', time: '57 min', rideHail: '₦5,600 · 84 min', note: 'Worst hour of the day. Ride-hail costs four times more and is slower.' },
-  { hour: 19, phase: 'evening', traffic: 74, best: 'BRT 102 to CMS, then the Lekki shuttle', mode: 'brt', cost: '₦900 to ₦1,300', time: '51 min', rideHail: '₦4,400 · 61 min', note: 'Easing slowly. BRT still wins on both cost and time.' },
+  { hour: 7, phase: 'rush', traffic: 71, best: 'BRT 102 to CMS, then the Lekki shuttle', mode: 'brt', cost: '₦900–1,300', time: '46 min', rideHail: '₦4,200 · 58 min', note: 'Third Mainland is filling up. Dedicated BRT lanes clear Fadeyi to CMS.' },
+  { hour: 8, phase: 'rush', traffic: 92, best: 'BRT 102 to CMS, then the Lekki shuttle', mode: 'brt', cost: '₦900–1,300', time: '48 min', rideHail: '₦4,500 · 66 min', note: 'Peak surge. The bus lane is the only part of the bridge that moves.' },
+  { hour: 9, phase: 'rush', traffic: 78, best: 'BRT 102 to CMS, then the Lekki shuttle', mode: 'brt', cost: '₦900–1,300', time: '44 min', rideHail: '₦4,100 · 57 min', note: 'Still heavy past Adeniji. BRT keeps its lead for one more hour.' },
+  { hour: 11, phase: 'midday', traffic: 41, best: 'Danfo via Obalende', mode: 'danfo', cost: '₦700–1,100', time: '50 min', rideHail: '₦3,300 · 34 min', note: 'Traffic eases. Danfo is the cheapest seat, ride-hail the quickest.' },
+  { hour: 13, phase: 'midday', traffic: 38, best: 'Danfo via Obalende', mode: 'danfo', cost: '₦700–1,100', time: '48 min', rideHail: '₦3,200 · 32 min', note: 'Quietest window of the day to cross to the Island.' },
+  { hour: 15, phase: 'midday', traffic: 52, best: 'Danfo via Obalende', mode: 'danfo', cost: '₦700–1,100', time: '52 min', rideHail: '₦3,500 · 39 min', note: 'School runs start. Lekki toll gate begins to slow.' },
+  { hour: 17, phase: 'evening', traffic: 88, best: 'BRT to CMS, then walk to the jetty ferry', mode: 'brt', cost: '₦1,400–1,900', time: '55 min', rideHail: '₦5,200 · 78 min', note: 'Island to Mainland is jammed, and the Lekki side is close behind.' },
+  { hour: 18, phase: 'evening', traffic: 95, best: 'BRT to CMS, then walk to the jetty ferry', mode: 'brt', cost: '₦1,400–1,900', time: '57 min', rideHail: '₦5,600 · 84 min', note: 'Worst hour of the day. Ride-hail costs four times more and is slower.' },
+  { hour: 19, phase: 'evening', traffic: 74, best: 'BRT 102 to CMS, then the Lekki shuttle', mode: 'brt', cost: '₦900–1,300', time: '51 min', rideHail: '₦4,400 · 61 min', note: 'Easing slowly. BRT still wins on both cost and time.' },
   { hour: 21, phase: 'night', traffic: 30, best: 'Ride-hail straight across Third Mainland', mode: 'ride', cost: '₦3,300', time: '29 min', rideHail: '₦3,300 · 29 min', note: 'BRT frequency drops after 9pm. A direct ride is safer and quick.' },
   { hour: 22, phase: 'night', traffic: 18, best: 'Ride-hail straight across Third Mainland', mode: 'ride', cost: '₦3,400', time: '25 min', rideHail: '₦3,400 · 25 min', note: 'Clear roads. Late-night surge is mild.' },
 ];

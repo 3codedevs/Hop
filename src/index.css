@@ -2,12 +2,13 @@
 
 /*
  * Hop design tokens.
- * One family (Inter Tight), one mono for real data, one accent.
- * Light "paper" sections alternate with dark "night" chapters.
+ * Newsreader (a serif with optical sizes) sets headlines and emphasis, the way
+ * an editor would. Inter Tight handles the interface and every number.
+ * One accent. Light "paper" sections alternate with dark "night" chapters.
  */
 @theme {
   --font-sans: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
 
   --color-ink: #0E0F0C;
   --color-paper: #F3F1EC;
@@ -33,6 +34,26 @@ html {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  font-optical-sizing: auto;
+  font-feature-settings: 'kern', 'liga', 'calt';
+  hanging-punctuation: first allow-end last;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+/* Serif headlines: real italics for emphasis, gentle tracking */
+.font-serif {
+  font-feature-settings: 'kern', 'liga', 'calt', 'onum' 0;
 }
 
 ::selection {
@@ -63,18 +84,16 @@ html.lenis body {
   padding-inline: var(--gutter);
 }
 
-/* Figures: tabular, mono */
+/* Figures that line up in columns */
 .num {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: tabular-nums lining-nums;
 }
 
-/* Small uppercase caption used for chapter labels and photo plates */
+/* Small supporting text: labels, photo credits, units */
 .caption {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: 0;
 }
 
 }
@@ -140,4 +159,40 @@ input[type="range"].hop-range::-moz-range-thumb {
   .cue {
     animation: none !important;
   }
+}
+
+/* MapLibre controls, restyled to sit quietly on the dark map */
+.hop-map .maplibregl-ctrl-group {
+  background: rgb(11 11 10 / 0.85);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 14px;
+  box-shadow: none;
+  overflow: hidden;
+}
+.hop-map .maplibregl-ctrl-group button {
+  width: 36px;
+  height: 36px;
+}
+.hop-map .maplibregl-ctrl-group button + button {
+  border-top: 1px solid rgb(255 255 255 / 0.1);
+}
+.hop-map .maplibregl-ctrl-group button .maplibregl-ctrl-icon {
+  filter: invert(1) opacity(0.75);
+}
+.hop-map .maplibregl-ctrl-attrib {
+  background: rgb(11 11 10 / 0.7) !important;
+  color: rgb(237 235 230 / 0.55);
+  font-size: 11px;
+}
+.hop-map .maplibregl-ctrl-attrib a {
+  color: rgb(237 235 230 / 0.7);
+}
+.hop-map .maplibregl-ctrl-attrib-button {
+  filter: invert(1) opacity(0.6);
+}
+.hop-map .maplibregl-cooperative-gesture-screen {
+  background: rgb(11 11 10 / 0.6);
+  color: var(--color-chalk);
+  font-family: var(--font-sans);
+  font-size: 15px;
 }

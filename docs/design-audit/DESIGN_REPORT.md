@@ -193,7 +193,7 @@ A clean product page (SheDrives, Cravvingss) **interleaved with dark cinematic c
 | `go` | `#1F9D6B` | Savings figures only |
 | `night` / `chalk` | `#0B0B0A` / `#EDEBE6` | Dark chapters |
 
-- **Type:** Inter Tight 200–700 for everything, and JetBrains Mono only for figures and captions.
+- **Type (revised):** Newsreader, a serif with optical sizes, for headlines, with real italics marking the second half of a headline, photo captions and chapter labels ("No. 3  Corridors"). Inter Tight sets the interface and every figure, using tabular numerals. The JetBrains Mono uppercase labels were removed: sentence case throughout, closed en dashes in ranges (₦900–1,300), balanced headline wrapping, hanging punctuation.
 - **Motion:** one ease (`cubic-bezier(.16,1,.3,1)`), Lenis, and `prefers-reduced-motion` respected (Lenis off, reveals off, grain off).
 
 ### 5.3 Page structure
@@ -203,7 +203,7 @@ A clean product page (SheDrives, Cravvingss) **interleaved with dark cinematic c
 | 2 | Hero: stat row, a large headline with a muted second half, the planner, a photo plate with caption, and the result card | light | mustakheem stats, SheDrives headline, Shanghai plate caption |
 | 3 | **(01) Rush hour: scroll changes the time** from 06:00 to 22:00 over Third Mainland. Photos crossfade day → dusk → night, a day scale runs down the side, a traffic bar shows congestion, and the best route, fare and ride-hail comparison update every hour | dark | **Shanghai time scrub**, Noir stat readout, grain |
 | 4 | (02) How it works: steps light up on scroll next to a sticky phone with three screens | light | SheDrives sticky phone |
-| 5 | (03) Corridors: dot-matrix map, a large hub readout, one-tap reports, live feed, aerial photo plate. Opens from an inset panel to full bleed | dark | SheDrives dot map, Noir readout |
+| 5 | (03) Corridors: a real vector map of Lagos (MapLibre with OpenFreeMap / OpenStreetMap tiles in a custom dark style), the Ikeja to Lekki corridor drawn along real roads (OSRM), hub pins at true coordinates that fly in to street level, a floating readout, one-tap reports and a live feed | dark | Noir readout, real cartography |
 | 6 | (04) Why Hop: numbered rows with hairlines next to a sticky photo | light | mustakheem rows, Wackowrld numbering |
 | 7 | (05) Self-drive: scroll-fill paragraph, a dark calculator, photo car cards and list rows, booking dialog | light | Cravvingss scroll fill |
 | 8 | (06) FAQ with hairline accordion, then a dark footer with a large CTA, photo credits and an oversized wordmark | light → dark | SheDrives / Wackowrld footer |
@@ -235,14 +235,17 @@ Syne, Instrument Serif and Plus Jakarta; the pastel cards; text scramble; blinki
 
 ---
 
-## 6. Photo credits (Unsplash License)
+## 6. Credits
+
+Map data © OpenStreetMap contributors, tiles by OpenFreeMap (OpenMapTiles schema), corridor route from the OSRM router.
+
+### Photos (Unsplash License)
 | File | Photographer | Source |
 |---|---|---|
 | `danfo-driver.jpg` | Ben Iwara | unsplash.com/photos/FHo82ziqAaQ |
 | `third-mainland-day.jpg` | Vitalis Nwenyi | unsplash.com/photos/xjqrUuUNs7o |
 | `lagos-dusk.jpg` | Ben Iwara | unsplash.com/photos/Lpk_o-XeRWo |
 | `lagos-bridge-night.jpg` | Opeyemi Adisa | unsplash.com/photos/Ww2j734hEcA |
-| `highway-aerial.jpg` | Vitalis Nwenyi | unsplash.com/photos/W7tLS5vmmCM |
 | `danfo-park.jpg` | Dami Akinbode | unsplash.com/photos/pwMCmK_6-OI |
 | `corolla-sedan.jpg` | Bestami Sarikaya | unsplash.com/photos/73XAgT8DOpo |
 | `corolla-hatch.jpg` | Trevor | unsplash.com/photos/6pmT6MRvUPM |

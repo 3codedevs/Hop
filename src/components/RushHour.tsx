@@ -8,6 +8,7 @@ import {
 } from 'framer-motion';
 import { DAY_PHASES, TIME_OF_DAY, type HourSnapshot } from '../data/hopData';
 import { EASE, MODE_META } from '../lib/ui';
+import { Kicker } from './Kicker';
 
 const START_H = 6;
 const END_H = 22;
@@ -84,9 +85,11 @@ export function RushHour() {
           {/* Chapter heading */}
           <div className="flex items-start justify-between gap-6">
             <div>
-              <div className="caption text-chalk/60">(01) · Time · Yaba to Lekki Phase 1</div>
-              <h2 className="mt-3 max-w-xl text-[clamp(1.75rem,3.2vw,2.75rem)] leading-[1] font-light tracking-[-0.04em]">
-                Lagos changes by the hour. <span className="text-chalk/50">So does the answer.</span>
+              <Kicker n={1} dark>
+                Rush hour, Yaba to Lekki Phase 1
+              </Kicker>
+              <h2 className="mt-4 max-w-xl font-serif text-[clamp(2rem,3.4vw,3rem)] leading-[1.04] font-normal tracking-[-0.02em]">
+                Lagos changes by the hour. <span className="italic text-chalk/65">So does the answer.</span>
               </h2>
             </div>
             <div className="caption hidden text-right text-chalk/60 md:block">
@@ -107,14 +110,14 @@ export function RushHour() {
           {/* Clock */}
           <div className="flex flex-1 flex-col items-center justify-center">
             <div
-              className="text-[clamp(5.5rem,17vw,15rem)] leading-none font-extralight tracking-[-0.06em] tabular-nums"
+              className="text-[clamp(5.5rem,17vw,15rem)] leading-none font-extralight tracking-[-0.04em] tabular-nums"
               aria-live="off"
             >
               {pad(hour)}
               <span className="text-chalk/45">:</span>
               {pad(minutes % 60)}
             </div>
-            <div className="caption mt-3 text-chalk/75">{phase.label}</div>
+            <div className="mt-2 font-serif text-[24px] italic text-chalk/85">{phase.label}</div>
           </div>
 
           {/* Bottom: answer card + scroll hint */}
@@ -133,7 +136,7 @@ export function RushHour() {
                 </span>
                 <span className="h-2 w-2 rounded-full bg-signal" />
               </div>
-              <div className="mt-3 text-[19px] leading-snug font-medium tracking-[-0.02em]">{snap.best}</div>
+              <div className="mt-3 font-serif text-[24px] leading-snug font-normal">{snap.best}</div>
               <div className="mt-4 grid grid-cols-2 gap-3 border-t border-white/10 pt-4 sm:grid-cols-3">
                 <div>
                   <div className="caption text-chalk/50">Cost</div>
@@ -153,7 +156,7 @@ export function RushHour() {
 
             <div className="caption hidden text-right text-chalk/60 sm:block">
               Scroll to change the time
-              <div className="mt-1 text-chalk/40">Photo · Vitalis Nwenyi, Ben Iwara, Opeyemi Adisa / Unsplash</div>
+              <div className="mt-1 text-chalk/40">Photos: Vitalis Nwenyi, Ben Iwara and Opeyemi Adisa</div>
             </div>
           </div>
         </div>

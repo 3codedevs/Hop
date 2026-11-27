@@ -14,3 +14,10 @@ export const MODE_META: Record<TravelMode, { label: string; icon: typeof Bus }> 
 export function scrollToId(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+/** Colours for corridor hub status on the map and readout. */
+export const HUB_STATUS = {
+  clear: { label: 'Moving', color: '#2FBF83' },
+  busy: { label: 'Slow', color: '#E9A23B' },
+  alert: { label: 'Alert', color: '#FF5A1F' },
+} as const;

@@ -11,8 +11,8 @@ import {
 import { EASE } from '../../lib/ui';
 
 /**
- * Masked line rise, word by word. Wrap words in *asterisks* to set them in the
- * muted tone (the "greyed second half" headline pattern).
+ * Masked line rise, word by word. Wrap words in *asterisks* to set them in
+ * italic and a softer tone, the way an editor would mark the second half of a headline.
  */
 export function RevealWords({
   text,
@@ -50,7 +50,7 @@ export function RevealWords({
           <Fragment key={`${word}-${i}`}>
             <span aria-hidden="true" className="inline-block overflow-hidden pb-[0.12em] -mb-[0.12em] align-bottom">
               <motion.span
-                className={`inline-block ${isMuted ? mutedClass : ''}`}
+                className={`inline-block ${isMuted ? `italic pr-[0.07em] ${mutedClass}` : ''}`}
                 initial={reduce ? false : { y: '105%' }}
                 animate={inView || reduce ? { y: '0%' } : undefined}
                 transition={{ duration: 1, ease: EASE, delay: delay + i * stagger }}

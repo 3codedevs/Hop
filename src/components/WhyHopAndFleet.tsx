@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, Shield, Star, X } from 'lucide-react';
 import { RENTAL_FLEET, WHY_HOP, type RentalCar } from '../data/hopData';
 import { Reveal, RevealWords, ScrollFillText } from './motion/TextFx';
 import { EASE } from '../lib/ui';
+import { Kicker } from './Kicker';
 
 const naira = (n: number) => `₦${n.toLocaleString('en-NG')}`;
 
@@ -31,8 +32,8 @@ export function WhyHopAndFleet() {
         <div className="shell grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28">
-              <div className="caption text-muted">(04) · Why Hop</div>
-              <h2 className="mt-4 text-[clamp(2.25rem,4.6vw,4.25rem)] leading-[0.98] font-medium tracking-[-0.045em]">
+              <Kicker n={4}>Why Hop</Kicker>
+              <h2 className="mt-5 font-serif text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.02] font-normal tracking-[-0.02em]">
                 <RevealWords text="Built for how Lagos *actually moves.*" />
               </h2>
               <Reveal delay={0.1}>
@@ -43,9 +44,9 @@ export function WhyHopAndFleet() {
                     loading="lazy"
                     className="aspect-[4/3] w-full rounded-[22px] object-cover"
                   />
-                  <figcaption className="caption mt-3 flex justify-between text-muted">
-                    <span>Plate 03 · Danfo park</span>
-                    <span>Dami Akinbode / Unsplash</span>
+                  <figcaption className="mt-3 flex items-baseline justify-between gap-4 text-[13px] text-muted">
+                    <span className="font-serif text-[15px] italic text-ink/75">Danfos lined up at a bus stop.</span>
+                    <span className="shrink-0">Photo: Dami Akinbode</span>
                   </figcaption>
                 </figure>
               </Reveal>
@@ -60,12 +61,12 @@ export function WhyHopAndFleet() {
                 delay={i * 0.04}
                 className="group grid grid-cols-[3rem_1fr] gap-x-4 border-b border-line py-8 sm:grid-cols-[4rem_1fr] md:py-10"
               >
-                  <span className="num pt-2 text-[12px] text-muted transition-colors duration-300 group-hover:text-signal-deep">
+                  <span className="pt-1 font-serif text-[22px] italic text-muted transition-colors duration-300 group-hover:text-signal-deep">
                     {item.num}
                   </span>
                   <div>
                     <div className="caption text-muted">{item.label}</div>
-                    <h3 className="mt-2 text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.1] font-medium tracking-[-0.035em] transition-transform duration-500 ease-[var(--ease-expo)] group-hover:translate-x-1.5">
+                    <h3 className="mt-2 font-serif text-[clamp(1.75rem,2.6vw,2.4rem)] leading-[1.1] font-normal tracking-[-0.015em] transition-transform duration-500 ease-[var(--ease-expo)] group-hover:translate-x-1.5">
                       {item.title}
                     </h3>
                     <p className="mt-3 max-w-lg text-[15px] leading-relaxed text-muted">{item.body}</p>
@@ -79,9 +80,9 @@ export function WhyHopAndFleet() {
       {/* Self-drive */}
       <section id="fleet" className="scroll-mt-16 border-t border-line py-24 md:py-36">
         <div className="shell">
-          <div className="caption text-muted">(05) · Self-drive</div>
+          <Kicker n={5}>Self-drive</Kicker>
           <ScrollFillText
-            className="mt-6 max-w-5xl text-[clamp(1.75rem,3.6vw,3.25rem)] leading-[1.12] font-medium tracking-[-0.035em]"
+            className="mt-6 max-w-5xl font-serif text-[clamp(2rem,3.8vw,3.5rem)] leading-[1.15] font-normal tracking-[-0.015em]"
             text="A day of errands across Yaba, VI and Lekki can mean four ride-hails. Past a certain number of trips, one verified car for the day costs less. Hop does that sum for you."
           />
 
@@ -93,7 +94,7 @@ export function WhyHopAndFleet() {
                   Ride-hail trips today
                 </label>
                 <div className="mt-3 flex items-baseline gap-3">
-                  <span className="text-[5rem] leading-none font-light tracking-[-0.06em]">{trips}</span>
+                  <span className="text-[5rem] leading-none font-light tracking-[-0.03em]">{trips}</span>
                   <span className="text-chalk/50">{trips === 1 ? 'trip' : 'trips'}</span>
                 </div>
                 <input
@@ -114,11 +115,11 @@ export function WhyHopAndFleet() {
               <dl className="grid grid-cols-2 border-t border-white/10 lg:col-span-7 lg:border-t-0 lg:border-l">
                 <div className="p-6 sm:p-10">
                   <dt className="caption text-chalk/50">Ride-hailing</dt>
-                  <dd className="num mt-3 text-[clamp(1.5rem,3vw,2.5rem)] tracking-[-0.04em]">{naira(rideHail)}</dd>
+                  <dd className="num mt-3 text-[clamp(1.5rem,3vw,2.5rem)] tracking-[-0.02em]">{naira(rideHail)}</dd>
                 </div>
                 <div className="border-l border-white/10 p-6 sm:p-10">
                   <dt className="caption text-chalk/50">Self-drive, 1 day</dt>
-                  <dd className="num mt-3 text-[clamp(1.5rem,3vw,2.5rem)] tracking-[-0.04em]">{naira(rental)}</dd>
+                  <dd className="num mt-3 text-[clamp(1.5rem,3vw,2.5rem)] tracking-[-0.02em]">{naira(rental)}</dd>
                 </div>
                 <div className="col-span-2 border-t border-white/10 p-6 sm:px-10">
                   <AnimatePresence mode="wait">
@@ -162,7 +163,7 @@ export function WhyHopAndFleet() {
                   </div>
                   <div className="flex items-end justify-between gap-4 p-6">
                     <div>
-                      <h3 className="text-[22px] font-medium tracking-[-0.03em]">
+                      <h3 className="text-[22px] font-medium tracking-[-0.015em]">
                         {c.name} <span className="num text-[13px] text-muted">{c.year}</span>
                       </h3>
                       <p className="mt-1 text-[13px] text-muted">
@@ -261,7 +262,7 @@ export function WhyHopAndFleet() {
 
                 {step === 'details' ? (
                   <>
-                    <h3 id="booking-title" className="mt-3 text-[24px] font-medium tracking-[-0.03em]">
+                    <h3 id="booking-title" className="mt-3 font-serif text-[28px] font-normal tracking-[-0.01em]">
                       {car.name} <span className="num text-[14px] text-muted">{car.year}</span>
                     </h3>
                     <p className="mt-1 text-[13px] text-muted">
@@ -292,7 +293,7 @@ export function WhyHopAndFleet() {
                 ) : (
                   <div className="py-6 text-center">
                     <CheckCircle2 className="mx-auto h-10 w-10 text-go" />
-                    <h3 id="booking-title" className="mt-3 text-[24px] font-medium tracking-[-0.03em]">
+                    <h3 id="booking-title" className="mt-3 font-serif text-[28px] font-normal tracking-[-0.01em]">
                       Booking request sent
                     </h3>
                     <p className="mt-2 text-[14px] text-muted">

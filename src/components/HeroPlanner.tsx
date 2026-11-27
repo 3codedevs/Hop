@@ -53,7 +53,7 @@ export function HeroPlanner({ onJumpToFleet }: HeroPlannerProps) {
         <motion.dl {...enter(0.05)} className="grid grid-cols-3 gap-4 border-b border-line pb-6 sm:flex sm:gap-x-12">
           {STATS.map((s) => (
             <div key={s.label} className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3">
-              <dt className="text-2xl font-light tracking-[-0.04em] sm:text-3xl">{s.n}</dt>
+              <dt className="text-2xl font-light tracking-[-0.02em] sm:text-3xl">{s.n}</dt>
               <dd className="text-[12px] leading-snug text-muted sm:text-[13px]">{s.label}</dd>
             </div>
           ))}
@@ -62,7 +62,7 @@ export function HeroPlanner({ onJumpToFleet }: HeroPlannerProps) {
         <div className="mt-12 grid gap-12 lg:grid-cols-12 lg:gap-10">
           {/* Left: headline + planner */}
           <div className="lg:col-span-7 lg:pt-6">
-            <h1 className="text-[clamp(2.75rem,5.4vw,5.25rem)] leading-[0.95] font-medium tracking-[-0.05em]">
+            <h1 className="font-serif text-[clamp(3rem,6vw,6rem)] leading-[0.98] font-normal tracking-[-0.025em]">
               <RevealWords text="Every way across Lagos, *ranked for the hour you leave.*" delay={0.1} />
             </h1>
             <motion.p {...enter(0.5)} className="mt-7 max-w-xl text-lg leading-relaxed text-muted">
@@ -135,9 +135,9 @@ export function HeroPlanner({ onJumpToFleet }: HeroPlannerProps) {
                 Danfo fares from ₦300
               </div>
             </div>
-            <figcaption className="caption mt-3 flex justify-between text-muted">
-              <span>Plate 01 · Danfo, Lagos</span>
-              <span>Ben Iwara / Unsplash</span>
+            <figcaption className="mt-3 flex items-baseline justify-between gap-4 text-[13px] text-muted">
+              <span className="font-serif text-[15px] italic text-ink/75">A danfo driver waiting for passengers.</span>
+              <span className="shrink-0">Photo: Ben Iwara</span>
             </figcaption>
           </motion.figure>
         </div>
@@ -163,7 +163,7 @@ export function HeroPlanner({ onJumpToFleet }: HeroPlannerProps) {
                   {active.topPick.savingsBadge}
                 </span>
               </div>
-              <h2 className="mt-5 max-w-xl text-[clamp(1.6rem,2.6vw,2.25rem)] leading-[1.08] font-medium tracking-[-0.035em]">
+              <h2 className="mt-5 max-w-xl font-serif text-[clamp(1.75rem,2.8vw,2.5rem)] leading-[1.08] font-normal tracking-[-0.015em]">
                 {active.topPick.title}
               </h2>
               <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muted">{active.topPick.reason}</p>
@@ -208,13 +208,13 @@ export function HeroPlanner({ onJumpToFleet }: HeroPlannerProps) {
               <div className="grid grid-cols-2 border-b border-line">
                 <div className="p-6 sm:p-8">
                   <div className="caption text-muted">Est. cost</div>
-                  <div className="mt-2 text-[clamp(1.4rem,2.1vw,1.9rem)] font-light tracking-[-0.04em] whitespace-nowrap tabular-nums">
+                  <div className="mt-2 text-[clamp(1.4rem,2.1vw,1.9rem)] font-light tracking-[-0.02em] whitespace-nowrap tabular-nums">
                     {active.topPick.costLabel.replace('About ', '')}
                   </div>
                 </div>
                 <div className="border-l border-line p-6 sm:p-8">
                   <div className="caption text-muted">Trip time</div>
-                  <div className="mt-2 text-[clamp(1.4rem,2.1vw,1.9rem)] font-light tracking-[-0.04em] whitespace-nowrap tabular-nums">
+                  <div className="mt-2 text-[clamp(1.4rem,2.1vw,1.9rem)] font-light tracking-[-0.02em] whitespace-nowrap tabular-nums">
                     {active.topPick.timeLabel}
                   </div>
                 </div>

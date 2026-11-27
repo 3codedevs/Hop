@@ -127,7 +127,7 @@ export function Navbar() {
                   <button
                     type="button"
                     onClick={() => go(l.id)}
-                    className="flex w-full items-baseline gap-4 py-4 text-left text-2xl font-medium tracking-[-0.02em]"
+                    className="flex w-full items-baseline gap-4 py-4 text-left font-serif text-[28px] font-normal"
                   >
                     <span className="num text-xs text-muted">0{i + 1}</span>
                     {l.label}

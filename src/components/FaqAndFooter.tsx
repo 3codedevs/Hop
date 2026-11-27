@@ -6,13 +6,13 @@ import { Logo } from './Navbar';
 import { scrollToId } from '../lib/ui';
 import { RevealWords } from './motion/TextFx';
 import { EASE } from '../lib/ui';
+import { Kicker } from './Kicker';
 
 const CREDITS = [
   ['Danfo driver', 'Ben Iwara'],
   ['Third Mainland Bridge', 'Vitalis Nwenyi'],
   ['Lagos at dusk', 'Ben Iwara'],
   ['Bridge at night', 'Opeyemi Adisa'],
-  ['Expressway from above', 'Vitalis Nwenyi'],
   ['Danfo park', 'Dami Akinbode'],
   ['Corolla sedan', 'Bestami Sarikaya'],
   ['Corolla hatch', 'Trevor'],
@@ -38,8 +38,8 @@ export function FaqAndFooter() {
       <section id="faq" className="border-t border-line py-24 md:py-36">
         <div className="shell grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <div className="caption text-muted">(06) · Questions</div>
-            <h2 className="mt-4 text-[clamp(2.25rem,4.6vw,4.25rem)] leading-[0.98] font-medium tracking-[-0.045em]">
+            <Kicker n={6}>Questions</Kicker>
+            <h2 className="mt-5 font-serif text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.02] font-normal tracking-[-0.02em]">
               <RevealWords text="What commuters *ask first.*" />
             </h2>
           </div>
@@ -55,7 +55,7 @@ export function FaqAndFooter() {
                       onClick={() => setOpenIdx(open ? null : idx)}
                       aria-expanded={open}
                       aria-controls={`faq-${idx}`}
-                      className="flex w-full items-center justify-between gap-6 py-6 text-left text-[clamp(1.1rem,1.6vw,1.35rem)] font-medium tracking-[-0.02em]"
+                      className="flex w-full items-center justify-between gap-6 py-6 text-left font-serif text-[clamp(1.3rem,1.9vw,1.6rem)] font-normal tracking-[-0.01em]"
                     >
                       {item.q}
                       <Plus
@@ -87,8 +87,8 @@ export function FaqAndFooter() {
       <footer ref={footerRef} data-tone="dark" className="grain relative overflow-hidden bg-night pt-24 text-chalk md:pt-32">
         <div className="shell relative">
           <div className="flex flex-col justify-between gap-10 border-b border-white/10 pb-16 md:flex-row md:items-end">
-            <h2 className="max-w-3xl text-[clamp(2.5rem,6vw,5.5rem)] leading-[0.95] font-light tracking-[-0.05em]">
-              <RevealWords text="Stop guessing. *Start moving.*" mutedClass="text-chalk/45" />
+            <h2 className="max-w-3xl font-serif text-[clamp(2.75rem,6.5vw,6rem)] leading-[1] font-normal tracking-[-0.02em]">
+              <RevealWords text="Stop guessing. *Start moving.*" mutedClass="text-chalk/60" />
             </h2>
             <div className="flex flex-wrap gap-3">
               <button
@@ -139,7 +139,7 @@ export function FaqAndFooter() {
 
         <div
           aria-hidden="true"
-          className="pointer-events-none -mb-[0.2em] select-none overflow-hidden text-center text-[34vw] leading-[0.8] font-light tracking-[-0.08em] text-chalk/[0.07]"
+          className="pointer-events-none -mb-[0.2em] select-none overflow-hidden text-center font-serif text-[34vw] leading-[0.8] font-light italic tracking-[-0.03em] text-chalk/[0.07]"
         >
           {reduce ? 'hop' : ['h', 'o', 'p'].map((c, i) => <Letter key={c} char={c} i={i} progress={scrollYProgress} />)}
         </div>

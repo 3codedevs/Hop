@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-mot
 import { ArrowRight, Bus, Car, Navigation } from 'lucide-react';
 import { RevealWords } from './motion/TextFx';
 import { EASE } from '../lib/ui';
+import { Kicker } from './Kicker';
 
 const STEPS = [
   {
@@ -39,8 +40,8 @@ function Step({ step, index, active, onActive }: { step: (typeof STEPS)[number];
         }`}
       >
         <div className="flex items-baseline gap-4">
-          <span className="num text-[12px] text-signal-deep">{step.num}</span>
-          <h3 className="text-[clamp(1.4rem,2.2vw,2rem)] leading-tight font-medium tracking-[-0.035em]">{step.title}</h3>
+          <span className="font-serif text-[20px] italic text-signal-deep">{step.num}</span>
+          <h3 className="font-serif text-[clamp(1.6rem,2.4vw,2.25rem)] leading-tight font-normal tracking-[-0.015em]">{step.title}</h3>
         </div>
         <p className="mt-3 max-w-md pl-9 text-[15px] leading-relaxed text-muted">{step.body}</p>
       </button>
@@ -52,7 +53,7 @@ function Screen({ step }: { step: number }) {
   if (step === 0)
     return (
       <div className="space-y-3">
-        <div className="text-[20px] font-medium tracking-[-0.03em]">Where to?</div>
+        <div className="text-[20px] font-semibold tracking-[-0.01em]">Where to?</div>
         <div className="flex items-center gap-3 rounded-xl bg-paper px-3.5 py-3 text-[14px]">
           <span className="h-2 w-2 rounded-full bg-ink" /> Yaba
         </div>
@@ -72,7 +73,7 @@ function Screen({ step }: { step: number }) {
     return (
       <div>
         <div className="flex items-baseline justify-between">
-          <div className="text-[20px] font-medium tracking-[-0.03em]">3 ways</div>
+          <div className="text-[20px] font-semibold tracking-[-0.01em]">3 ways</div>
           <span className="caption text-muted">08:00</span>
         </div>
         <ul className="mt-3 divide-y divide-line">
@@ -99,7 +100,7 @@ function Screen({ step }: { step: number }) {
     );
   return (
     <div>
-      <div className="text-[20px] font-medium tracking-[-0.03em]">Your day: 4 stops</div>
+      <div className="text-[20px] font-semibold tracking-[-0.01em]">Your day: 4 stops</div>
       <div className="mt-3 overflow-hidden rounded-xl">
         <img src="/img/corolla-sedan.jpg" alt="" className="h-28 w-full object-cover" />
       </div>
@@ -131,8 +132,8 @@ export function StickyJourney() {
     <section id="how" className="py-24 md:py-36">
       <div className="shell">
         <div className="max-w-3xl">
-          <div className="caption text-muted">(02) · How it works</div>
-          <h2 className="mt-4 text-[clamp(2.25rem,4.6vw,4.25rem)] leading-[0.98] font-medium tracking-[-0.045em]">
+          <Kicker n={2}>How it works</Kicker>
+          <h2 className="mt-5 font-serif text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.02] font-normal tracking-[-0.02em]">
             <RevealWords text="From a guess to *one clear decision.*" />
           </h2>
         </div>
@@ -172,7 +173,7 @@ export function StickyJourney() {
                 </div>
               </div>
               <div className="caption mt-5 text-center text-muted">
-                Step {STEPS[active].num} / 03
+                Step {active + 1} of 3
               </div>
             </div>
           </div>
