@@ -1,0 +1,86 @@
+/*
+ * Starter tokens for a "paper and ink, one accent" site.
+ * Tailwind v4: keep the @theme block, then use bg-paper, text-ink, text-muted,
+ * border-line, bg-signal, font-serif, ease-expo and so on.
+ * Plain CSS: copy the custom properties into :root and use var(--color-ink).
+ *
+ * Change --color-signal to an accent from the product's own world.
+ */
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+
+  /* Light sections */
+  --color-paper: #F3F1EC;   /* page background: warm, never pure white */
+  --color-surface: #FFFFFF; /* cards and inputs */
+  --color-ink: #0E0F0C;     /* text and primary buttons: never pure black */
+  --color-muted: #6B6B65;   /* secondary text (4.5:1 on paper) */
+  --color-line: rgb(14 15 12 / 0.12); /* hairlines */
+
+  /* The one accent, plus one semantic colour if the product needs it */
+  --color-signal: #FF5A1F;
+  --color-signal-deep: #C93C0A; /* accent dark enough for small text on paper */
+  --color-go: #1F9D6B;          /* savings and success only */
+
+  /* Dark chapters */
+  --color-night: #0B0B0A;
+  --color-chalk: #EDEBE6;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --gutter: clamp(20px, 4vw, 56px);
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  font-feature-settings: 'kern', 'liga', 'calt';
+  hanging-punctuation: first allow-end last;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { text-wrap: balance; }
+p, li, dd { text-wrap: pretty; }
+
+::selection { background: var(--color-signal); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-signal); outline-offset: 3px; }
+
+/* Custom classes go in a layer so Tailwind utilities can still override them */
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .num { font-variant-numeric: tabular-nums lining-nums; }
+  .caption { font-size: 13px; line-height: 1.4; }
+}
+
+/* Optional film grain for dark chapters */
+.grain { position: relative; }
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.8s steps(4) infinite;
+}
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-2%, -1%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain::after { animation: none; }
+}
