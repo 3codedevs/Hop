@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+/*
+ * Hop design tokens.
+ * One family (Inter Tight), one mono for real data, one accent.
+ * Light "paper" sections alternate with dark "night" chapters.
+ */
+@theme {
+  --font-sans: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink: #0E0F0C;
+  --color-paper: #F3F1EC;
+  --color-surface: #FFFFFF;
+  --color-muted: #6B6B65;
+  --color-line: rgb(14 15 12 / 0.12);
+  --color-signal: #FF5A1F;
+  --color-signal-deep: #C93C0A;
+  --color-go: #1F9D6B;
+  --color-night: #0B0B0A;
+  --color-chalk: #EDEBE6;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --gutter: clamp(20px, 4vw, 56px);
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-signal);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 3px;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+@layer components {
+/* Layout shell shared by every section */
+.shell {
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Figures: tabular, mono */
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Small uppercase caption used for chapter labels and photo plates */
+.caption {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+}
+
+/* Film grain on dark chapters (Noir / Shanghai) */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.8s steps(4) infinite;
+}
+
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-2%, -1%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Scroll cue line */
+@keyframes cue {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+.cue {
+  animation: cue 2.2s var(--ease-expo) infinite;
+}
+
+/* Range input */
+input[type="range"].hop-range {
+  appearance: none;
+  height: 2px;
+  background: rgb(237 235 230 / 0.25);
+  border-radius: 2px;
+}
+input[type="range"].hop-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--color-signal);
+  border: 4px solid var(--color-night);
+  box-shadow: 0 0 0 1px var(--color-signal);
+  cursor: pointer;
+}
+input[type="range"].hop-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--color-signal);
+  border: 4px solid var(--color-night);
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain::after,
+  .cue {
+    animation: none !important;
+  }
+}
