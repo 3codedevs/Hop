@@ -1,14 +1,17 @@
-import { Bus, Car, Footprints, Navigation } from 'lucide-react';
-import type { TravelMode } from '../data/hopData';
+import { Bike, Bus, Car, Footprints, Navigation, TrainFront } from 'lucide-react';
+import type { TravelMode } from '../../shared/types';
 
 export const EASE = [0.16, 1, 0.3, 1] as const;
 
-export const MODE_META: Record<TravelMode, { label: string; icon: typeof Bus }> = {
-  brt: { label: 'BRT', icon: Bus },
-  danfo: { label: 'Danfo', icon: Bus },
-  ride: { label: 'Ride-hail', icon: Navigation },
-  rental: { label: 'Self-drive', icon: Car },
-  walk: { label: 'Walk', icon: Footprints },
+/** `color` tints icons on dark chips; `line` draws the mode on Hop's paper map. */
+export const MODE_META: Record<TravelMode, { label: string; icon: typeof Bus; color: string; line: string }> = {
+  brt: { label: 'BRT', icon: Bus, color: '#FF5A1F', line: '#FF5A1F' },
+  rail: { label: 'Train', icon: TrainFront, color: '#7AA7FF', line: '#D7263D' },
+  danfo: { label: 'Danfo', icon: Bus, color: '#E9B23B', line: '#C98A0B' },
+  keke: { label: 'Keke', icon: Bike, color: '#2FBF83', line: '#16A06A' },
+  ride: { label: 'Ride-hail', icon: Navigation, color: '#EDEBE6', line: '#0E0F0C' },
+  rental: { label: 'Self-drive', icon: Car, color: '#EDEBE6', line: '#0E0F0C' },
+  walk: { label: 'Walk', icon: Footprints, color: '#A9A79F', line: '#6B6B65' },
 };
 
 export function scrollToId(id: string) {

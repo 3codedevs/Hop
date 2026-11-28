@@ -1,34 +1,29 @@
-# React + TypeScript + Vite
+# Hop
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Every way across Lagos, ranked for the hour you leave. Hop compares BRT, trains, danfo, keke, ride-hailing and self-drive rental, and rents cars with or without a driver when that wins.
 
-Currently, two official plugins are available:
+- Landing page: `/`
+- Demo app: `/app` (Plan, Live map, Rent, Trips, Account)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Run it
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `tsrs` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev      # http://localhost:5173, with the API served locally
+npm run build
+npm run lint
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
-"# hop_landing" 
-"# hop" 
+## How it’s built
+
+- **Frontend:** React 19, Vite, Tailwind v4, framer-motion, MapLibre with Hop’s own map style (OpenFreeMap tiles).
+- **API:** Web-standard handlers in `api/`, deployed as Vercel Functions. In development, a Vite plugin serves the same handlers.
+- **Logic and demo data:** in `server/` (planner, traffic model, network, fleet). Shared types are in `shared/`.
+- **Road shapes:** `server/data/roads.ts` is generated once from OSRM (© OpenStreetMap contributors) by `node scripts/fetch-roads.ts`.
+
+## Docs
+
+- [Product, workflows and roadmap](docs/ROADMAP.md)
+- [Design audit and redesign notes](docs/design-audit/DESIGN_REPORT.md)
+
+Traffic in the demo is simulated, and fares are estimates. Car photos are credited on each car’s page.

@@ -2,8 +2,8 @@ import { useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion';
 import { ArrowUp, ArrowUpRight, Plus } from 'lucide-react';
 import { FAQ_ITEMS } from '../data/hopData';
+import { Link } from './Link';
 import { Logo } from './Navbar';
-import { scrollToId } from '../lib/ui';
 import { RevealWords } from './motion/TextFx';
 import { EASE } from '../lib/ui';
 import { Kicker } from './Kicker';
@@ -91,14 +91,13 @@ export function FaqAndFooter() {
               <RevealWords text="Stop guessing. *Start moving.*" mutedClass="text-chalk/60" />
             </h2>
             <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={() => scrollToId('planner')}
+              <Link
+                to="/app"
                 className="group inline-flex h-12 items-center gap-2 rounded-full bg-signal px-6 text-[15px] font-semibold text-ink"
               >
                 Plan a trip
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
-              </button>
+              </Link>
               <button
                 type="button"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

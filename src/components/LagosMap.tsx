@@ -5,6 +5,7 @@ import type { GeoJSONSource, LngLatBoundsLike, Map as MapLibreMap, PaddingOption
 import type { LagosHub } from '../data/hopData';
 import { CORRIDOR_ROUTE } from '../data/corridorRoute';
 import { lagosMapStyle } from '../lib/mapStyle';
+import { loadMapLibre } from '../lib/maplibre';
 import { HUB_STATUS } from '../lib/ui';
 
 const SIGNAL = '#FF5A1F';
@@ -84,13 +85,8 @@ export function LagosMap({ hubs, selectedId, onSelect, padding, resetSignal }: L
 
     (async () => {
       try {
-        const [ml, worker] = await Promise.all([
-          import('maplibre-gl'),
-          import('maplibre-gl/dist/maplibre-gl-worker.mjs?url'),
-          import('maplibre-gl/dist/maplibre-gl.css'),
-        ]);
+        const ml = await loadMapLibre();
         if (cancelled) return;
-        ml.setWorkerUrl(new URL(worker.default, window.location.href).href);
 
         const map = new ml.Map({
           container,

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { EASE, scrollToId } from '../lib/ui';
+import { Link } from './Link';
 
 const LINKS = [
   { id: 'rush', label: 'Rush hour' },
@@ -91,14 +92,13 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => go('planner')}
+            <Link
+              to="/app"
               className="group inline-flex h-11 items-center gap-1.5 rounded-full bg-signal px-4 text-[13px] font-semibold text-ink transition-transform duration-300 hover:-translate-y-px lg:h-10"
             >
               Plan a trip
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
-            </button>
+            </Link>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}

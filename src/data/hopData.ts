@@ -1,4 +1,5 @@
-export type TravelMode = 'brt' | 'danfo' | 'ride' | 'rental' | 'walk';
+import type { TravelMode } from '../../shared/types';
+export type { TravelMode };
 
 export interface RouteAlternative {
   mode: TravelMode;

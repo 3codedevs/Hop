@@ -213,3 +213,75 @@ input[type="range"].hop-range::-moz-range-thumb {
   font-family: var(--font-sans);
   font-size: 15px;
 }
+
+/* App dark theme: near-black, not pure black; higher surfaces are lighter */
+.hop-dark {
+  --color-paper: #121211;
+  --color-surface: #1C1C1A;
+  --color-ink: #ECEAE4;
+  --color-muted: #9E9B93;
+  --color-line: rgb(255 255 255 / 0.1);
+  --color-night: #262522;
+  --color-signal-deep: #FF7A45;
+  --color-go: #3CC08A;
+  color-scheme: dark;
+}
+.hop-dark .hop-paper .maplibregl-ctrl-group {
+  background: rgb(28 28 26 / 0.95);
+}
+.hop-dark .hop-paper .maplibregl-ctrl-group button .maplibregl-ctrl-icon {
+  filter: invert(1) opacity(0.8);
+}
+.hop-dark .hop-paper .maplibregl-ctrl-attrib {
+  background: rgb(18 18 17 / 0.85) !important;
+}
+.hop-dark input[type="range"].hop-range-light {
+  background: rgb(255 255 255 / 0.16);
+}
+
+/* The same slider on light surfaces */
+input[type="range"].hop-range-light {
+  height: 4px;
+  background: rgb(14 15 12 / 0.14);
+}
+input[type="range"].hop-range-light::-webkit-slider-thumb {
+  border-color: var(--color-surface);
+  box-shadow: 0 0 0 1px var(--color-signal), 0 2px 8px rgb(14 15 12 / 0.25);
+}
+input[type="range"].hop-range-light::-moz-range-thumb {
+  border-color: var(--color-surface);
+}
+
+/* Hop's paper map: light controls that sit on the printed-map colours */
+.hop-paper .maplibregl-ctrl-group {
+  background: rgb(255 255 255 / 0.95);
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px -10px rgb(14 15 12 / 0.35);
+  overflow: hidden;
+}
+.hop-paper .maplibregl-ctrl-group button {
+  width: 40px;
+  height: 40px;
+}
+.hop-paper .maplibregl-ctrl-group button + button {
+  border-top: 1px solid var(--color-line);
+}
+.hop-paper .maplibregl-ctrl-attrib {
+  background: rgb(243 241 236 / 0.85) !important;
+  color: var(--color-muted);
+  font-size: 11px;
+}
+.hop-paper .maplibregl-ctrl-attrib a {
+  color: var(--color-muted);
+}
+.hop-paper .maplibregl-cooperative-gesture-screen {
+  background: rgb(14 15 12 / 0.55);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  font-size: 15px;
+}
+.hop-paper .maplibregl-user-location-dot,
+.hop-paper .maplibregl-user-location-dot::before {
+  background-color: #2563eb;
+}
